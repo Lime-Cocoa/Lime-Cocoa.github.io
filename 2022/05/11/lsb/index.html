@@ -16,12 +16,12 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="基于matlab实现的LSB 图像信息隐藏算法载体图片  秘密信息  首先将载体图片的8个位平面提取出来  然后将秘密信息嵌入  最后算一下峰值信噪比  PSNR&#x3D;51.166892$dB$，效果良好。 以下是该算法的源代码： inputbmp.m 12345678910111213141516171819X&#x3D;double(imread(&amp;#x27;cameraman.bmp&amp;#x27;));[h">
+    <meta name="description" content="基于matlab实现的LSB 图像信息隐藏算法载体图片  秘密信息  首先将载体图片的8个位平面提取出来  然后将秘密信息嵌入  最后算一下峰值信噪比  PSNR&#x3D;51.166892分贝，效果良好。 以下是该算法的源代码： inputbmp.m 12345678910111213141516171819X&#x3D;double(imread(&amp;#x27;cameraman.bmp&amp;#x27;));[h,w">
 <meta property="og:type" content="article">
 <meta property="og:title" content="基于matlab实现的LSB 图像信息隐藏算法">
 <meta property="og:url" content="http://example.com/2022/05/11/lsb/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="基于matlab实现的LSB 图像信息隐藏算法载体图片  秘密信息  首先将载体图片的8个位平面提取出来  然后将秘密信息嵌入  最后算一下峰值信噪比  PSNR&#x3D;51.166892$dB$，效果良好。 以下是该算法的源代码： inputbmp.m 12345678910111213141516171819X&#x3D;double(imread(&amp;#x27;cameraman.bmp&amp;#x27;));[h">
+<meta property="og:description" content="基于matlab实现的LSB 图像信息隐藏算法载体图片  秘密信息  首先将载体图片的8个位平面提取出来  然后将秘密信息嵌入  最后算一下峰值信噪比  PSNR&#x3D;51.166892分贝，效果良好。 以下是该算法的源代码： inputbmp.m 12345678910111213141516171819X&#x3D;double(imread(&amp;#x27;cameraman.bmp&amp;#x27;));[h,w">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://raw.githubusercontent.com/Lime-Cocoa/shellexample/main/cameraman.bmp">
 <meta property="og:image" content="https://raw.githubusercontent.com/Lime-Cocoa/shellexample/main/1.bmp">
@@ -29,7 +29,7 @@
 <meta property="og:image" content="https://github.com/Lime-Cocoa/shellexample/blob/main/2.png?raw=true">
 <meta property="og:image" content="https://github.com/Lime-Cocoa/shellexample/blob/main/3.png?raw=true">
 <meta property="article:published_time" content="2022-05-11T08:07:55.519Z">
-<meta property="article:modified_time" content="2022-05-11T08:29:24.464Z">
+<meta property="article:modified_time" content="2022-05-11T08:32:19.720Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/Lime-Cocoa/shellexample/main/cameraman.bmp">
@@ -253,7 +253,7 @@
 <p><img src="https://github.com/Lime-Cocoa/shellexample/blob/main/2.png?raw=true" srcset="/img/loading.gif" lazyload></p>
 <p>最后算一下峰值信噪比</p>
 <p><img src="https://github.com/Lime-Cocoa/shellexample/blob/main/3.png?raw=true" srcset="/img/loading.gif" lazyload></p>
-<p>PSNR=51.166892$dB$，效果良好。</p>
+<p>PSNR=51.166892分贝，效果良好。</p>
 <p>以下是该算法的源代码：</p>
 <p>inputbmp.m</p>
 <figure class="highlight matlab"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></div></td><td class="code"><pre><code class="hljs matlab">X=double(imread(<span class="hljs-string">&#x27;cameraman.bmp&#x27;</span>));<br>[h,w] = <span class="hljs-built_in">size</span>(X); <span class="hljs-comment">%取图像的长宽像素点个数</span><br>subplot(<span class="hljs-number">3</span>,<span class="hljs-number">3</span>,<span class="hljs-number">1</span>); <span class="hljs-comment">%将多个图画到一个平面上的工具</span><br>imshow(X,[]); <span class="hljs-comment">%matlab中显示图像的函数</span><br>title(<span class="hljs-string">&#x27;原始图像&#x27;</span>);<br><br><span class="hljs-comment">%遍历每个位平面，画出八个图</span><br><span class="hljs-keyword">for</span> k=<span class="hljs-number">1</span>:<span class="hljs-number">8</span>  <span class="hljs-comment">%k在1~8间循环,遍历每个像素点，取第k位</span><br> <span class="hljs-keyword">for</span> <span class="hljs-built_in">i</span>=<span class="hljs-number">1</span>:h <br>     <span class="hljs-keyword">for</span> <span class="hljs-built_in">j</span>=<span class="hljs-number">1</span>:w<br>      tmp(<span class="hljs-built_in">i</span>,<span class="hljs-built_in">j</span>) = bitget(X(<span class="hljs-built_in">i</span>,<span class="hljs-built_in">j</span>),k); <span class="hljs-comment">%bitget函数首先将X(i,j)处灰度值分解为二进制串，然后取第k位</span><br>     <span class="hljs-keyword">end</span><br> <span class="hljs-keyword">end</span><br> subplot(<span class="hljs-number">3</span>,<span class="hljs-number">3</span>,k+<span class="hljs-number">1</span>); <span class="hljs-comment">%图排成3行3列，p表示图所在的位置，p=1表示从左到右从上到下的第一个位置。</span><br> imshow(tmp,[]);<br> ind = num2str(k); <span class="hljs-comment">%把数值转换成字符串，用于标题</span><br> imti = [<span class="hljs-string">&#x27;第&#x27;</span>,ind,<span class="hljs-string">&#x27;个位平面&#x27;</span>];<br> title(imti);<br><span class="hljs-keyword">end</span><br></code></pre></td></tr></table></figure>
